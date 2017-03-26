@@ -1,2 +1,41 @@
-# xiaoping.github.io
-blog
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <div style="padding:10px;">
+        <label for="file">
+            <input type="file" name="fil" id="file" style="display: none;">
+            <span>sign in</span>
+        </label>
+    </div>
+    <script>
+        var file = document.getElementById("file");
+        file.onchange = function ()
+        {
+            var fileList = this.files[0];
+                if(fileList.type.indexOf("image")!=-1)
+            {
+                var rouTine = new FileReader;
+                rouTine.readAsDataURL(fileList);
+                rouTine.readAsArrayBuffer();
+                rouTine.onload = function (ev)
+                {
+                    console.log(ev);
+                    var img = new Image();
+                    img.src = ev.target.result;
+                    img.onload = function ()
+                    {
+                        document.body.appendChild(img);
+                    }
+                };
+            }
+        }
+    </script>
+</body>
+</html>
